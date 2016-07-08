@@ -1,10 +1,10 @@
-from radio.controllers.hello import db
+from radio import db
 
 
-class test(db.Model):
+class Test(db.Model):
     __tablename__ = 'test'
     id = db.Column('id', db.Integer, primary_key=True)
-    data = db.Column('data', db.Unicode)
+    data = db.Column('data', db.Text)
 
     def __init__(self, data):
         self.data = data

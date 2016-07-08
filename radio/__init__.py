@@ -7,6 +7,9 @@ from radio.controllers import index
 
 
 app = Flask(__name__)
+app.config.from_object('radio.default_settings')
+
+db = SQLAlchemy(app)
 
 
 app.register_blueprint(status.mod, url_prefix='/status')
