@@ -5,8 +5,8 @@ from radio.exceptions.validation import ValidationException
 mod = Blueprint('templates', __name__)
 
 
-@mod.route('/<template_name>', methods=["POST"])
-def add_template(template_name):
+@mod.route('/new', methods=["POST"])
+def add_template():
     request_data = request.json
 
     try:
@@ -16,25 +16,36 @@ def add_template(template_name):
 
     from radio.services import template_service
 
-    request_data["name"] = template_name
-    template_service.create_template(request_data)
+    return_data = template_service.create_template(request_data)
 
-    return jsonify(request_data)
+    return jsonify(return_data)
 
 
 @mod.route('/<template_name>', methods=["GET"])
 def get_template(template_name):
 
-    return jsonify(template_name=template_name)
+    from radio.services import template_service
+
+    template = template_service.get_template(template_name)
+
+    return jsonify(template)
 
 
 @mod.route('/<template_name>/disable', methods=["POST"])
 def disable_template(template_name):
 
-    return jsonify(template_name="disabled")
+    from radio.services import template_service
+
+    status = template_service.disable_template(template_name)
+
+    return jsonify(template_name=template_name, message=status)
 
 
 @mod.route('/<template_name>/enable', methods=["POST"])
 def enable_template(template_name):
 
-    return jsonify(template_name="enabled")
+    from radio.services import template_service
+
+    status = template_service.enable_template(template_name)
+
+    return jsonify(template_name=template_name, message=status)

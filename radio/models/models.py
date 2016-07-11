@@ -15,12 +15,12 @@ class Test(db.Model):
 
 class Templates(db.Model):
     __tablename__ = 'templates'
-    id = db.Column('id', db.Integer, primary_key=True),
-    name = db.Column('name', db.String(128), nullable=False, unique=True),
-    description = db.Column('description', db.String(256), nullable=False),
-    body = db.Column('body', db.Text, nullable=False),
-    version = db.Column('version', db.Integer, nullable=False),
-    handler = db.Column('handler', db.String(16), nullable=False),
+    id = db.Column('id', db.Integer, primary_key=True)
+    name = db.Column('name', db.String(128), nullable=False, unique=True)
+    description = db.Column('description', db.String(256), nullable=False)
+    body = db.Column('body', db.Text, nullable=False)
+    version = db.Column('version', db.Integer, nullable=False)
+    handler = db.Column('handler', db.String(16), nullable=False)
     is_enabled = db.Column('is_enabled', db.Boolean, nullable=False)
 
     def __init__(self, request_data):
@@ -28,10 +28,16 @@ class Templates(db.Model):
         self.description = request_data.get('description')
         self.handler = request_data.get('handler')
         self.body = request_data.get('body')
+        self.version = request_data.get('version')
+        self.is_enabled = request_data.get('is_enabled')
 
     def to_dict(self):
         return {
+            'id': self.id,
+            'name': self.name,
             'description': self.description,
             'handler': self.handler,
-            'body': self.body
+            'body': self.body,
+            'version': self.version,
+            'is_enabled': self.is_enabled
         }
