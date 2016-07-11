@@ -38,7 +38,7 @@ def disable_template(template_name):
 
     status = template_service.disable_template(template_name)
 
-    return jsonify(template_name=template_name, message=status)
+    return jsonify(message=status)
 
 
 @mod.route('/<template_name>/enable', methods=["POST"])
@@ -48,4 +48,4 @@ def enable_template(template_name):
 
     status = template_service.enable_template(template_name)
 
-    return jsonify(template_name=template_name, message=status)
+    return jsonify(message=status)
