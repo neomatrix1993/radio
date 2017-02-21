@@ -15,3 +15,10 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+That's it!
+
+```
+python run.py
+```
+Server is on!
